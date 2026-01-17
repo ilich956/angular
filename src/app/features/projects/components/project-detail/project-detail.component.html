@@ -1,0 +1,119 @@
+@if (project$ | async; as project) {
+  @if (project) {
+  <div class="project-detail">
+    <div class="detail-header">
+      <div>
+        <a routerLink="/projects" class="back-link">← Back to Projects</a>
+        <div class="title-section">
+          <h1>{{ project.name }}</h1>
+          <div class="badges">
+            <span class="status-badge" [ngClass]="getStatusClass(project.status)">
+              {{ project.status | titlecase }}
+            </span>
+            <span class="priority-badge" [ngClass]="getPriorityClass(project.priority)">
+              {{ project.priority | titlecase }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary" (click)="onEdit()">✏️ Edit</button>
+        <button class="btn-danger" (click)="onDelete()">🗑️ Delete</button>
+      </div>
+    </div>
+
+    <div class="detail-content">
+      <div class="main-section">
+        <div class="section">
+          <h2>Description</h2>
+          <p>{{ project.description }}</p>
+        </div>
+
+        <div class="progress-section">
+          <h2>Progress</h2>
+          <div class="progress-bar-large">
+            <div class="progress-fill" [style.width.%]="project.progress"></div>
+          </div>
+          <p class="progress-text">{{ project.progress }}% Complete</p>
+        </div>
+
+        @if (project.budget) {
+          <div class="budget-section">
+            <h2>Budget</h2>
+            <div class="budget-grid">
+              <div class="budget-item">
+                <span class="budget-label">Total Budget</span>
+                <span class="budget-value">${{ project.budget | number }}</span>
+              </div>
+              @if (project.spent) {
+                <div class="budget-item">
+                  <span class="budget-label">Spent</span>
+                  <span class="budget-value">${{ project.spent | number }}</span>
+                </div>
+                <div class="budget-item">
+                  <span class="budget-label">Remaining</span>
+                  <span class="budget-value">${{ (project.budget - project.spent) | number }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (project.tags.length > 0) {
+          <div class="tags-section">
+            <h2>Tags</h2>
+            <div class="tags">
+              @for (tag of project.tags; track tag) {
+                <span class="tag">#{{ tag }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="sidebar">
+        <div class="info-card">
+          <h3>Project Information</h3>
+          <div class="info-item">
+            <span class="info-label">Owner</span>
+            <span class="info-value">{{ project.ownerName }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Start Date</span>
+            <span class="info-value">{{ project.startDate | date }}</span>
+          </div>
+          @if (project.endDate) {
+            <div class="info-item">
+              <span class="info-label">End Date</span>
+              <span class="info-value">{{ project.endDate | date }}</span>
+            </div>
+          }
+          <div class="info-item">
+            <span class="info-label">Team Members</span>
+            <span class="info-value">{{ project.teamMembers.length }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Created</span>
+            <span class="info-value">{{ project.createdAt | date }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Last Updated</span>
+            <span class="info-value">{{ project.updatedAt | date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  } @else {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Project not found</p>
+      <a routerLink="/projects" class="back-link">← Back to Projects</a>
+    </div>
+  }
+} @else {
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading project...</p>
+  </div>
+}

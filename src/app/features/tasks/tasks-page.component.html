@@ -1,0 +1,132 @@
+<div class="tasks-page">
+  <div class="page-header">
+    <div>
+      <h1>Tasks</h1>
+      <p class="subtitle">Manage and track your tasks</p>
+    </div>
+    <button class="btn-primary" (click)="showCreateModal.set(true)">
+      ➕ New Task
+    </button>
+  </div>
+
+  <div class="filters">
+    <button 
+      class="filter-btn" 
+      [class.active]="filterStatus() === 'all'"
+      (click)="filterStatus.set('all')"
+    >
+      All ({{ tasks().length }})
+    </button>
+    <button 
+      class="filter-btn" 
+      [class.active]="filterStatus() === TaskStatus.TODO"
+      (click)="filterStatus.set(TaskStatus.TODO)"
+    >
+      Todo ({{ getStatusCount(TaskStatus.TODO) }})
+    </button>
+    <button 
+      class="filter-btn" 
+      [class.active]="filterStatus() === TaskStatus.IN_PROGRESS"
+      (click)="filterStatus.set(TaskStatus.IN_PROGRESS)"
+    >
+      In Progress ({{ getStatusCount(TaskStatus.IN_PROGRESS) }})
+    </button>
+    <button 
+      class="filter-btn" 
+      [class.active]="filterStatus() === TaskStatus.COMPLETED"
+      (click)="filterStatus.set(TaskStatus.COMPLETED)"
+    >
+      Completed ({{ getStatusCount(TaskStatus.COMPLETED) }})
+    </button>
+  </div>
+
+  @if (filteredTasks.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">✓</div>
+      <h2>No tasks found</h2>
+      <p>Create your first task to get started</p>
+      <button class="btn-primary" (click)="showCreateModal.set(true)">Create Task</button>
+    </div>
+  } @else {
+    <div class="tasks-list">
+      @for (task of filteredTasks; track task.id) {
+        <div class="task-card">
+          <div class="task-header">
+            <div class="task-title-section">
+              <input 
+                type="checkbox" 
+                [checked]="task.status === TaskStatus.COMPLETED"
+                (change)="onStatusChange(task, task.status === TaskStatus.COMPLETED ? TaskStatus.TODO : TaskStatus.COMPLETED)"
+                class="task-checkbox"
+              />
+              <h3>{{ task.title }}</h3>
+            </div>
+            <div class="task-badges">
+              <span class="status-badge" [ngClass]="getStatusClass(task.status)">
+                {{ task.status | titlecase }}
+              </span>
+              <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
+                {{ task.priority | titlecase }}
+              </span>
+            </div>
+          </div>
+          
+          @if (task.description) {
+            <p class="task-description">{{ task.description }}</p>
+          }
+
+          <div class="task-meta">
+            @if (task.projectName) {
+              <span class="meta-item">📁 {{ task.projectName }}</span>
+            }
+            @if (task.assigneeName) {
+              <span class="meta-item">👤 {{ task.assigneeName }}</span>
+            }
+            @if (task.dueDate) {
+              <span class="meta-item">📅 {{ task.dueDate | date }}</span>
+            }
+          </div>
+
+          @if (task.tags.length > 0) {
+            <div class="task-tags">
+              @for (tag of task.tags; track tag) {
+                <span class="tag">#{{ tag }}</span>
+              }
+            </div>
+          }
+
+          <div class="task-actions">
+            @if (task.status !== TaskStatus.COMPLETED) {
+              <button 
+                class="btn-action" 
+                (click)="onStatusChange(task, TaskStatus.IN_PROGRESS)"
+                [class.hidden]="task.status === TaskStatus.IN_PROGRESS"
+              >
+                Start
+              </button>
+              <button 
+                class="btn-action" 
+                (click)="onStatusChange(task, TaskStatus.COMPLETED)"
+              >
+                Complete
+              </button>
+            }
+            <button 
+              class="btn-danger" 
+              (click)="onTaskDeleted(task.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (showCreateModal()) {
+    <app-create-task-modal
+      (close)="showCreateModal.set(false)"
+      (taskCreated)="onTaskCreated()"
+    ></app-create-task-modal>
+  }
+</div>

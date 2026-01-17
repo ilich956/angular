@@ -1,0 +1,194 @@
+.project-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      flex: 1;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .status-badge,
+    .priority-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge {
+      &.status-planning {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      &.status-in-progress {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      &.status-on-hold {
+        background: #f3f4f6;
+        color: #374151;
+      }
+      &.status-completed {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      &.status-cancelled {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+    }
+
+    .priority-badge {
+      &.priority-low {
+        background: #e0e7ff;
+        color: #3730a3;
+      }
+      &.priority-medium {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      &.priority-high {
+        background: #fed7aa;
+        color: #9a3412;
+      }
+      &.priority-critical {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+    }
+  }
+
+  .description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .progress-section {
+    margin-bottom: 1rem;
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+
+      .progress-label {
+        color: #6b7280;
+        font-weight: 500;
+      }
+
+      .progress-value {
+        color: #1f2937;
+        font-weight: 600;
+      }
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s;
+      }
+    }
+  }
+
+  .budget-section {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+
+    .budget-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .budget-label {
+        font-size: 0.75rem;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .budget-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .team-info {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+
+      .owner,
+      .team-count {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      .tag {
+        padding: 0.25rem 0.5rem;
+        background: #f3f4f6;
+        color: #4b5563;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

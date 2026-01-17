@@ -1,0 +1,26 @@
+<div class="user-list">
+  <div class="header">
+    <h2>Users</h2>
+    <button (click)="onRefresh()" [disabled]="loading$ | async">
+      {{ (loading$ | async) ? 'Loading...' : 'Refresh' }}
+    </button>
+  </div>
+
+  @if (error$ | async; as error) {
+    <div class="error">
+      Error: {{ error }}
+    </div>
+  }
+
+  @if (loading$ | async) {
+    <div class="loading">Loading users...</div>
+  } @else {
+    <div class="users">
+      @for (user of users$ | async; track user.id) {
+        <app-user-list-item [user]="user"></app-user-list-item>
+      } @empty {
+        <div class="empty">No users found</div>
+      }
+    </div>
+  }
+</div>

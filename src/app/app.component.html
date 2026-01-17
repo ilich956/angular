@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo-section">
+      <h1 class="logo">{{ appName }}</h1>
+      <span class="logo-subtitle">Project Management Platform</span>
+    </div>
+    <ul class="nav-menu">
+      <li><a routerLink="/dashboard" routerLinkActive="active">
+        <span class="icon">📊</span> Dashboard
+      </a></li>
+      <li><a routerLink="/projects" routerLinkActive="active">
+        <span class="icon">📁</span> Projects
+      </a></li>
+      <li><a routerLink="/tasks" routerLinkActive="active">
+        <span class="icon">✓</span> Tasks
+      </a></li>
+      <li><a routerLink="/team" routerLinkActive="active">
+        <span class="icon">👥</span> Team
+      </a></li>
+      <li><a routerLink="/analytics" routerLinkActive="active">
+        <span class="icon">📈</span> Analytics
+      </a></li>
+    </ul>
+    <div class="user-menu">
+      <div class="user-avatar">JD</div>
+    </div>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

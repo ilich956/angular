@@ -1,0 +1,338 @@
+.project-detail {
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e5e7eb;
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #764ba2;
+      }
+    }
+
+    .title-section {
+      h1 {
+        margin: 0 0 1rem 0;
+        font-size: 2.5rem;
+        color: #1f2937;
+        font-weight: 700;
+      }
+
+      .badges {
+        display: flex;
+        gap: 0.75rem;
+
+        .status-badge,
+        .priority-badge {
+          padding: 0.5rem 1rem;
+          border-radius: 12px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+  }
+
+  .detail-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .main-section {
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+
+      h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.25rem;
+        color: #1f2937;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        color: #6b7280;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .progress-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.25rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .progress-bar-large {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s;
+      }
+    }
+
+    .progress-text {
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  .budget-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.25rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .budget-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+
+      .budget-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .budget-label {
+          font-size: 0.875rem;
+          color: #6b7280;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .budget-value {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1f2937;
+        }
+      }
+    }
+  }
+
+  .tags-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.25rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .tag {
+        padding: 0.5rem 1rem;
+        background: #f3f4f6;
+        color: #4b5563;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .sidebar {
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+      position: sticky;
+      top: 2rem;
+
+      h3 {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.125rem;
+        color: #1f2937;
+        font-weight: 600;
+      }
+
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f3f4f6;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .info-label {
+          color: #6b7280;
+          font-size: 0.875rem;
+        }
+
+        .info-value {
+          color: #1f2937;
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+
+    &:hover {
+      background: #e5e7eb;
+    }
+  }
+
+  .btn-danger {
+    background: #fee2e2;
+    color: #dc2626;
+
+    &:hover {
+      background: #fecaca;
+    }
+  }
+
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #e5e7eb;
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #6b7280;
+    }
+  }
+}
+
+.status-badge,
+.priority-badge {
+  &.status-planning {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  &.status-in-progress {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  &.status-on-hold {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  &.status-completed {
+    background: #d1fae5;
+    color: #065f46;
+  }
+  &.status-cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  &.priority-low {
+    background: #e0e7ff;
+    color: #3730a3;
+  }
+  &.priority-medium {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  &.priority-high {
+    background: #fed7aa;
+    color: #9a3412;
+  }
+  &.priority-critical {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

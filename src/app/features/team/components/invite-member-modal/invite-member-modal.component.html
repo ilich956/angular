@@ -1,0 +1,86 @@
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Invite Team Member</h2>
+      <button class="close-btn" (click)="onCancel()">✕</button>
+    </div>
+
+    <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" class="modal-body">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Enter full name"
+        />
+        @if (memberForm.get('name')?.invalid && memberForm.get('name')?.touched) {
+          <span class="error-text">Name is required (min 2 characters)</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Enter email address"
+        />
+        @if (memberForm.get('email')?.invalid && memberForm.get('email')?.touched) {
+          <span class="error-text">Valid email is required</span>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="role">Role *</label>
+          <select id="role" formControlName="role" class="form-control">
+            @for (role of roles; track role) {
+              <option [value]="role">{{ role | titlecase }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status *</label>
+          <select id="status" formControlName="status" class="form-control">
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ status | titlecase }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input
+          id="department"
+          type="text"
+          formControlName="department"
+          class="form-control"
+          placeholder="Enter department"
+        />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="onCancel()" [disabled]="isSubmitting()">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="memberForm.invalid || isSubmitting()"
+        >
+          @if (isSubmitting()) {
+            Inviting...
+          } @else {
+            Invite Member
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

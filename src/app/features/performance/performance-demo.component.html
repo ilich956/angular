@@ -1,0 +1,38 @@
+<div class="performance-demo">
+  <h1>Performance Optimization Demo</h1>
+  
+  <section class="demo-section">
+    <h2>Angular Signals & OnPush Strategy</h2>
+    <div class="counter">
+      <p>Count: {{ count() }}</p>
+      <p>Double Count (computed): {{ doubleCount() }}</p>
+      <button (click)="increment()">Increment</button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h2>Optimized List Rendering (Track By Function)</h2>
+    <div class="actions">
+      <button (click)="addItems()">Add 1000 Items</button>
+      <button (click)="clearItems()">Clear Items</button>
+    </div>
+    <div class="items-list">
+      @for (item of items(); track trackByIndex($index)) {
+        <div class="item">Item {{ item }}</div>
+      } @empty {
+        <p>No items. Click "Add 1000 Items" to see optimization in action.</p>
+      }
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h2>Performance Best Practices</h2>
+    <ul>
+      <li>✓ OnPush Change Detection Strategy</li>
+      <li>✓ Angular Signals for reactive state</li>
+      <li>✓ Track by functions in *ngFor</li>
+      <li>✓ Lazy loading routes</li>
+      <li>✓ Standalone components (tree-shakeable)</li>
+    </ul>
+  </section>
+</div>

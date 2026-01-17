@@ -1,0 +1,114 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="subtitle">Welcome back! Here's what's happening with your projects.</p>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/analytics" class="btn-secondary">📊 Reports</a>
+      <a routerLink="/projects" class="btn-primary">➕ New Project</a>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📁</div>
+      <div class="stat-content">
+        <h3>{{ stats().totalProjects }}</h3>
+        <p>Total Projects</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🚀</div>
+      <div class="stat-content">
+        <h3>{{ stats().activeProjects }}</h3>
+        <p>Active Projects</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">✓</div>
+      <div class="stat-content">
+        <h3>{{ stats().completedProjects }}</h3>
+        <p>Completed</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-content">
+        <h3>{{ stats().totalTasks }}</h3>
+        <p>Total Tasks</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <h3>{{ stats().teamMembers }}</h3>
+        <p>Team Members</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-content">
+        <h3>${{ stats().budget | number }}</h3>
+        <p>Total Budget</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="recent-activity">
+      <h2>Recent Activity</h2>
+      <div class="activity-list">
+        @for (activity of recentActivities(); track activity.name) {
+          <div class="activity-item">
+            <div class="activity-icon">
+              @if (activity.type === 'project') {
+                📁
+              } @else {
+                ✓
+              }
+            </div>
+            <div class="activity-content">
+              <p>
+                <strong>{{ activity.user }}</strong> {{ activity.action }} 
+                <strong>{{ activity.name }}</strong>
+              </p>
+              <span class="activity-time">{{ activity.time }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="actions-grid">
+        <a routerLink="/projects" class="action-card" (click)="onNewProject()">
+          <div class="action-icon">📁</div>
+          <h3>View Projects</h3>
+          <p>Manage all your projects</p>
+        </a>
+        <a routerLink="/tasks" class="action-card">
+          <div class="action-icon">✓</div>
+          <h3>View Tasks</h3>
+          <p>Track your tasks</p>
+        </a>
+        <a routerLink="/team" class="action-card">
+          <div class="action-icon">👥</div>
+          <h3>Team</h3>
+          <p>Manage team members</p>
+        </a>
+        <a routerLink="/analytics" class="action-card">
+          <div class="action-icon">📈</div>
+          <h3>Analytics</h3>
+          <p>View reports and insights</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

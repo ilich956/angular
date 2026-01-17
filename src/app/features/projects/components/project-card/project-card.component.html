@@ -1,0 +1,54 @@
+<div class="project-card" (click)="onCardClick()">
+  <div class="card-header">
+    <h3>{{ project.name }}</h3>
+    <div class="badges">
+      <span class="status-badge" [ngClass]="getStatusClass(project.status)">
+        {{ project.status | titlecase }}
+      </span>
+      <span class="priority-badge" [ngClass]="getPriorityClass(project.priority)">
+        {{ project.priority | titlecase }}
+      </span>
+    </div>
+  </div>
+
+  <p class="description">{{ project.description }}</p>
+
+  <div class="progress-section">
+    <div class="progress-header">
+      <span class="progress-label">Progress</span>
+      <span class="progress-value">{{ project.progress }}%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="project.progress"></div>
+    </div>
+  </div>
+
+  @if (project.budget) {
+    <div class="budget-section">
+      <div class="budget-item">
+        <span class="budget-label">Budget</span>
+        <span class="budget-value">${{ project.budget | number }}</span>
+      </div>
+      @if (project.spent) {
+        <div class="budget-item">
+          <span class="budget-label">Spent</span>
+          <span class="budget-value">${{ project.spent | number }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <div class="card-footer">
+    <div class="team-info">
+      <span class="owner">👤 {{ project.ownerName }}</span>
+      @if (project.teamMembers.length > 0) {
+        <span class="team-count">👥 {{ project.teamMembers.length }} members</span>
+      }
+    </div>
+    <div class="tags">
+      @for (tag of project.tags; track tag) {
+        <span class="tag">#{{ tag }}</span>
+      }
+    </div>
+  </div>
+</div>

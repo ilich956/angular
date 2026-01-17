@@ -1,0 +1,45 @@
+<div class="rxjs-demo">
+  <h1>RxJS Advanced Patterns Demo</h1>
+
+  <section class="demo-section">
+    <h2>Interval with ShareReplay (Caching)</h2>
+    <p>Counter: {{ counter$ | async }}</p>
+    <p class="note">This counter uses shareReplay to cache the last value and share the subscription.</p>
+  </section>
+
+  <section class="demo-section">
+    <h2>Search with Debounce & DistinctUntilChanged</h2>
+    <input
+      type="text"
+      [value]="searchValue()"
+      (input)="onSearchChange($any($event.target).value)"
+      placeholder="Type at least 2 characters..."
+      class="search-input"
+    />
+    @if (errorMessage(); as error) {
+      <div class="error">{{ error }}</div>
+    }
+    @if (searchResults().length > 0) {
+      <ul class="results">
+        @for (result of searchResults(); track result) {
+          <li>{{ result }}</li>
+        }
+      </ul>
+    } @else if (searchValue().length >= 2) {
+      <p>No results found</p>
+    }
+  </section>
+
+  <section class="demo-section">
+    <h2>RxJS Patterns Demonstrated</h2>
+    <ul>
+      <li>✓ DebounceTime - Wait for user to stop typing</li>
+      <li>✓ DistinctUntilChanged - Only emit when value changes</li>
+      <li>✓ SwitchMap - Cancel previous requests</li>
+      <li>✓ Retry - Automatic retry on failure</li>
+      <li>✓ ShareReplay - Cache and share observables</li>
+      <li>✓ TakeUntil - Unsubscribe pattern</li>
+      <li>✓ Error handling with catchError</li>
+    </ul>
+  </section>
+</div>

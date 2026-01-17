@@ -1,0 +1,57 @@
+<div class="team-page">
+  <div class="page-header">
+    <div>
+      <h1>Team</h1>
+      <p class="subtitle">Manage your team members</p>
+    </div>
+    <button class="btn-primary" (click)="showInviteModal.set(true)">
+      ➕ Invite Member
+    </button>
+  </div>
+
+  @if (members().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">👥</div>
+      <h2>No team members yet</h2>
+      <p>Invite your first team member to get started</p>
+      <button class="btn-primary" (click)="showInviteModal.set(true)">Invite Member</button>
+    </div>
+  } @else {
+    <div class="members-grid">
+      @for (member of members(); track member.id) {
+        <div class="member-card">
+          <div class="member-avatar">
+            {{ member.name.charAt(0).toUpperCase() }}{{ (member.name.split(' ')[1] || '').charAt(0).toUpperCase() }}
+          </div>
+          <div class="member-info">
+            <h3>{{ member.name }}</h3>
+            <p class="member-email">{{ member.email }}</p>
+            <div class="member-badges">
+              <span class="role-badge">
+                {{ getRoleIcon(member.role) }} {{ member.role | titlecase }}
+              </span>
+              <span class="status-badge" [ngClass]="getStatusClass(member.status)">
+                {{ member.status | titlecase }}
+              </span>
+            </div>
+            @if (member.department) {
+              <p class="member-department">🏢 {{ member.department }}</p>
+            }
+            <div class="member-stats">
+              <span class="stat-item">📁 {{ member.projectsCount }} projects</span>
+              <span class="stat-item">✓ {{ member.tasksCount }} tasks</span>
+            </div>
+            <button class="btn-danger" (click)="onMemberRemoved(member.id)">Remove</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (showInviteModal()) {
+    <app-invite-member-modal
+      (close)="showInviteModal.set(false)"
+      (memberInvited)="onMemberInvited()"
+    ></app-invite-member-modal>
+  }
+</div>

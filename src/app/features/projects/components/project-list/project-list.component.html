@@ -1,0 +1,44 @@
+<div class="project-list-page">
+  <div class="page-header">
+    <div>
+      <h1>Projects</h1>
+      <p class="subtitle">Manage and track your projects</p>
+    </div>
+    <button class="btn-primary" (click)="openCreateModal()">
+      <span>➕</span> New Project
+    </button>
+  </div>
+
+  @if (error$ | async; as error) {
+    <div class="error-message">
+      ⚠️ Error loading projects: {{ error }}
+    </div>
+  }
+
+  @if (loading$ | async) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading projects...</p>
+    </div>
+  } @else {
+    <div class="projects-grid">
+      @for (project of projects$ | async; track project.id) {
+        <app-project-card [project]="project"></app-project-card>
+      } @empty {
+        <div class="empty-state">
+          <div class="empty-icon">📁</div>
+          <h2>No projects yet</h2>
+          <p>Create your first project to get started</p>
+          <button class="btn-primary" (click)="openCreateModal()">➕ Create Project</button>
+        </div>
+      }
+    </div>
+  }
+
+  @if (showCreateModal()) {
+    <app-create-project-modal
+      (close)="closeCreateModal()"
+      (projectCreated)="onProjectCreated()"
+    ></app-create-project-modal>
+  }
+</div>
